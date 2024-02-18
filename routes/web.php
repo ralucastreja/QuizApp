@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChapterController;
+use App\Http\Controllers\QuizController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/chapters', [ChapterController::class, 'index'])->name('chapters.index');
+Route::get('/quizzes/{quiz}', [QuizController::class, 'show'])->name('quizzes.show');
