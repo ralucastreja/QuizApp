@@ -10,11 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('chapters', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->integer('number')->unique();
-            $table->timestamps();
+        Schema::table('questions', function (Blueprint $table) {
+            $table->integer('number')->after('text'); // Adjust placement as needed
         });
     }
 
@@ -23,6 +20,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('chapters');
+        Schema::table('questions', function (Blueprint $table) {
+            $table->dropColumn('number');
+        });
     }
 };

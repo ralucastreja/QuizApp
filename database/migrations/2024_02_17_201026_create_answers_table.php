@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,7 +12,13 @@ return new class extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('question_id');
+            $table->text('text'); // Stores the answer text
+            $table->boolean('is_correct')->default(false); // Indicates if the answer is the correct one
             $table->timestamps();
+
+            // Foreign key constraint
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
         });
     }
 
